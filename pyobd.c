@@ -32,7 +32,12 @@ static void parse_can_msg(struct can_frame frame){
 
         break;
      }
-
+	
+     // make sure only free slot is used	   
+     if(msg_decriptors[i][0] != 0x0){
+	continue;
+     }
+	     
      //send FC
      if ( frame.can_id & CAN_EFF_FLAG ){
 	FC_frame.can_id = 0x18DA00F1 | ((0x000000FF &  frame.can_id) << 8);
